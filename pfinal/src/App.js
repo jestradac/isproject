@@ -39,6 +39,7 @@ class App extends Component {
           </a>
         </header>
         { this.state.user ? ( <Home /> ) : ( <Login /> ) }
+        
       </div>
     );
   }
