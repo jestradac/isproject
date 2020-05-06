@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import fire from './config/fire.js'
 import Login from './views/Login.js'
 import Home from './Home.js'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import RecoverPassword from './views/RecoverPassword';
+import Register from './views/Register';
+import history from './config/history';
 
 class App extends Component {
 
@@ -34,12 +38,32 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <a>
+          <h1>
             TRANSPORTE
-          </a>
+          </h1>
         </header>
-        { this.state.user ? ( <Home /> ) : ( <Login /> ) }
-        
+
+        <Router>
+          <div>
+
+
+            <Switch history={history}>
+              <Route exact path="/">
+                {this.state.user ? (<Home />) : (<Login />)}
+              </Route>
+
+              <Route path="/RecoverPassword">
+                {this.state.user ? (<Home />) : (<RecoverPassword />)}
+              </Route>
+
+              <Route path="/Register">
+                {this.state.user ? (<Home />) : (<Register />)}
+              </Route>
+
+            </Switch>
+          </div>
+        </Router>
+
       </div>
     );
   }

@@ -1,9 +1,11 @@
 import React from 'react';
 import 'firebaseui/dist/firebaseui.css';
 import fire from '../config/fire';
-import RecoverPassword from './RecoverPassword';
+import history from '../config/history';
 
 class Login extends React.Component {
+
+    
     login() {
         const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
@@ -15,8 +17,10 @@ class Login extends React.Component {
                 console.log('Error: ' + err.toString());
             })
     }
+
+
     signUp() {
-        const email = document.querySelector('#email').value;
+      /*  const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
         fire.auth().createUserWithEmailAndPassword(email, password)
             .then((u) => {
@@ -24,11 +28,12 @@ class Login extends React.Component {
             })
             .catch((err) => {
                 console.log('Error: ' + err.toString());
-            })
+            })*/
+
+            history.push('Register')
+
     }
 
-    recover() {
-    }
 
     render() {
         return (
@@ -45,7 +50,7 @@ class Login extends React.Component {
                 <button style={{ margin: '10px' }} onClick={this.signUp}>Sign Up</button>
 
                 <div>
-                    <a href="#" name="OlvideContrasena" onClick={this.recover}>
+                    <a href="RecoverPassword" name="OlvideContrasena">
                         olviste tu contraseña?
 
                     </a>
