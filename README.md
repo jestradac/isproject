@@ -9,3 +9,5 @@ Empezar proyecto
 Clonar el proyecto
 npm install firebase
 npm start
+npm install react-router-dom
+npm install history
