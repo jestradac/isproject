@@ -7,7 +7,7 @@ import Home from './Home.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import RecoverPassword from './views/RecoverPassword';
 import Register from './views/Register';
-import history from './config/history';
+import bowserhistory from './config/history';
 
 class App extends Component {
 
@@ -43,11 +43,11 @@ class App extends Component {
           </h1>
         </header>
 
-        <Router>
+        <Router history={bowserhistory}>
           <div>
 
 
-            <Switch history={history}>
+            <Switch >
               <Route exact path="/">
                 {this.state.user ? (<Home />) : (<Login />)}
               </Route>

@@ -1,7 +1,6 @@
 import React from 'react';
 import 'firebaseui/dist/firebaseui.css';
 import fire from '../config/fire';
-import history from '../config/history';
 
 class Login extends React.Component {
 
@@ -19,8 +18,8 @@ class Login extends React.Component {
     }
 
 
-    signUp() {
-      /*  const email = document.querySelector('#email').value;
+  /*  signUp() {
+        const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
         fire.auth().createUserWithEmailAndPassword(email, password)
             .then((u) => {
@@ -28,32 +27,31 @@ class Login extends React.Component {
             })
             .catch((err) => {
                 console.log('Error: ' + err.toString());
-            })*/
+            })
 
-            history.push('Register')
-
-    }
-
+            this.props.history.push('Register')
+    }*/
 
     render() {
         return (
-            <div style={{ textAlign: 'center' }}>
-                <div>
-                    <div>Correo Electrónico</div>
+            <div style={{ margin : '10pxl' }}>
+                <div style ={{margin:'10px'}}>
+                    <div>Correo Electrónico: </div>
                     <input id="email" placeholder="Ingrese su correo electrónico" type="text" />
                 </div>
-                <div>
+                <div style={{margin:'10px'}}>
                     <div>Password</div>
                     <input id="password" placeholder="Ingrese su contraseña" type="password" />
                 </div>
-                <button style={{ margin: '10px' }} onClick={this.login}>Login</button>
-                <button style={{ margin: '10px' }} onClick={this.signUp}>Sign Up</button>
+                <button style ={{margin:'5px'}}  onClick={this.login}>Login</button>
 
                 <div>
-                    <a href="RecoverPassword" name="OlvideContrasena">
+                   <div style ={{margin:'10px'}}>
+                   <a style={{ margin: '10px' }} href="Register">Registrarse</a><br/>
+                   <a style={{ margin: '10px' }} href="RecoverPassword" name="OlvideContrasena">
                         olviste tu contraseña?
-
                     </a>
+                   </div>
                 </div>
             </div >
         )

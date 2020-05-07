@@ -1,37 +1,47 @@
 import 'firebaseui/dist/firebaseui.css';
 import React from 'react';
 import fire from '../config/fire';
-
+import history from '../config/history';
 
 
 
 class RecoverPassword extends React.Component {
 
+
+
     recover() {
-        const email = document.querySelector('#email').value
+        var emailAddress = document.querySelector('#emailr').value;
+        var auth = fire.auth();
 
-        fire.auth.sendPasswordResetEmail(email)
-            .then((u) => {
-                console.log('Se ha enviado un codigdo a tu correo lectronico');
-                alert("Se ha enviado un correo a su cuenta")
-            })
-            .catch((err) => {
-                console.log('Error: ' + err.toString());
-                alert("El usuario no ha sido encontrado")
-            })
+        if (emailAddress === null) {
+            alert('Debe ingresar un dato valido');
+            return;
+        } else {
+            try {
+                auth.sendPasswordResetEmail(emailAddress).then(function () {
+                    alert('Email Sent');
+                    history.push('/')
 
-
+                }).catch(function (error) {
+                    alert('El campo email no debe estar vacio o debe ingresar un correo valido');
+                    //      alert(error);
+                });
+            } catch (error) {
+                // alert(error);
+            }
+        }
     }
 
     render() {
         return (
-            <div style={{ textAlign: 'center' }}>
-                <div>
-                    <div>Escriba su correo electrónico</div>
-                    <input id="email" placeholder="Ingrese su correo electrónico" type="text" />
+            <div >
+                <div style={{ margin: '5px' }}>
+                    <div style={{ margin: '10px' }}>Escriba su correo electrónico</div>
+                    <input style={{ margin: '5px' }} id="emailr" name='emailr' placeholder="Ingrese su correo electrónico" type="text" />
                 </div>
 
                 <button style={{ margin: '10px' }} onClick={this.recover}>Enviar</button>
+                <a href='/'>Volver</a>
             </div>
         )
     }
