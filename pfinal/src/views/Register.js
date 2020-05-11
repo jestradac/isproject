@@ -1,5 +1,8 @@
 import React from 'react';
 import 'firebaseui/dist/firebaseui.css';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col'
 
 class Register extends React.Component {
 
@@ -36,11 +39,14 @@ class Register extends React.Component {
     save(e) {
 
         if (!this.validate()) {
+            console.log('error')
             return;
         }
         this.setState({
             message: 'Registrado Correctamente'
+
         })
+        console.log('ok');
     }
 
     validate() {
@@ -55,78 +61,110 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div style={{ textAlign: "center", margin: '10px' }}>
-
+            <Form style={{width:'35%', marginLeft:'auto', marginRight:'auto',  color: '#6c757d'}}>
                 <div style={{ margin: '10px' }}>
-                    <label htmlFor="username">Nombre de Usuario:  </label>
-                    <input name="username" id="username" type="text" value={this.state.username} onChange={this.onChange.bind(this)} />
+
+                    <Form.Group style={{ margin: '10px', textAlign:'left' }}>
+                        <Form.Label  htmlFor="username">Nombre de Usuario:  </Form.Label>
+                        <Form.Control name="username" id="username" type="text" value={this.state.username} onChange={this.onChange.bind(this)} />
+                    </Form.Group>
+                    <Form.Row style={{textAlign:'left'}}> 
+                        <Form.Group   as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmlFor="name" >Nombre:   </Form.Label>
+                            <Form.Control name="name" id="name" type="text" value={this.state.name} onChange={this.onChange.bind(this)} />
+                        </Form.Group>
+
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmlFor="surname">Apellido:</Form.Label>
+                            <Form.Control name="surname" id="surname" type="text" value={this.state.surname} onChange={this.onChange.bind(this)} />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Row style={{textAlign:'left'}}>
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmform="password">Contrasena:  </Form.Label>
+                            <Form.Control name="password" id="password" type="password" value={this.state.password} onChange={this.onChange.bind(this)} />
+                        </Form.Group>
+
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmform="confirmpassword">Confirmar Contrasena: </Form.Label>
+                            <Form.Control name="confirmpassword" id="confirmpassword" type="password" value={this.state.password} onChange={this.onChange.bind(this)} />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Row style={{textAlign:'left'}}>
+
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmlFor="country">Ciudad: </Form.Label>
+                            <Form.Control as='select' id="country" name="country" value={this.state.country} onChange={this.onChange.bind(this)}>
+                                <option value="">Seleccione una Ciudad</option>
+                                <option value="">Santa Cruz</option>
+                                <option value="">La Paz</option>
+                                <option value="">El Alto</option>
+                                <option value="">Cochabamba</option>
+                                <option value="">Tarija</option>
+                                <option value="">Potosi</option>
+                                <option value="">Chuquisaca</option>
+                                <option value="">Oruro</option>
+                                <option value="">Beni</option>
+                                <option value="">Pando</option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group as={Col} style={{ margin: '10px' }}>
+                            <Form.Label htmlFor="phone">Telefono: </Form.Label>
+                            <Form.Control name="phone" id="phone" type="text" value={this.state.phone} onChange={this.onChange.bind(this)} />
+                        </Form.Group>
+                    </Form.Row>
+
+
+                    <Form.Group style={{ marginLeft: '10px', textAlign:'left' }}>
+                        <Form.Label htmlFor="typeuser">Tipo de Usuario: </Form.Label>
+                        {['radio'].map((type) => (
+                            <div key={type} style={{textAlign:'left'}} className="mb-3">
+                                <Form.Check type={type} id='typeUser' style={{ display: 'flex' }}>
+
+                                    <Form.Group style={{ marginTop: '15px', width:'50%'}}>
+                                        <Form.Check.Input type="radio" name="typeuser" value="d" onChange={this.onChange.bind(this)} isValid />
+                                        <Form.Check.Label style={{ color: '#6c757d' }}>Dador de Carga</Form.Check.Label>
+                                    </Form.Group>
+
+                                    <Form.Group style={{ marginTop: '15px', width:'50%' }}>
+                                        <Form.Check.Input type="radio" name="typeuser" value="t" onChange={this.onChange.bind(this)} isValid />
+                                        <Form.Check.Label style={{ color: '#6c757d' }}>Transportista</Form.Check.Label>
+                                    </Form.Group>
+
+                                </Form.Check>
+                            </div>
+                        ))}
+                    </Form.Group>
+
+                    <Form.Group style={{ margin: '10px', textAlign:'left' }}>
+                        <Form.Label htmlFor="email">Correo Electronico: </Form.Label>
+                        <Form.Control name="email" id="email" type="text" value={this.state.email} onChange={this.onChange.bind(this)} />
+                    </Form.Group>
+
+                    <Form.Group style={{ margin: '10px' }}>
+                        {['checkbox'].map((type) => (
+                            <div key={type} className="mb-3">
+                                <Form.Check type='checkbox' id='acept' name="acept" value={this.state.acept} onChange={this.onChange.bind(this)}>
+                                    <Form.Check.Input type={type} isValid />
+                                    <Form.Check.Label style={{ color: '#6c757d' }}>Acepta terminos y condiciones</Form.Check.Label>
+                                </Form.Check>
+                            </div>
+                        ))}
+                    </Form.Group>
+
+                    <Form.Group style={{ margin: '10px', textAlign:'center' }}>
+                        <Form.Row>
+                            <Button style={{ margin: '10px', width: '30%', marginLeft: '30%' }} id='registrar' onClick={this.save.bind(this)}> Registrar</Button>
+                            <a style={{ margin: '10px' }} href='/'>Volver</a>
+
+                        </Form.Row>
+                    </Form.Group>
+
                 </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="name" >Nombre:   </label>
-                    <input name="name" id="name" type="text" value={this.state.name} onChange={this.onChange.bind(this)} />
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="surname">Apellido:   </label>
-                    <input name="surname" id="surname" type="text" value={this.state.surname} onChange={this.onChange.bind(this)} />
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmform="password">Contrasena:  </label>
-                    <input name="password" id="password" type="password" value={this.state.password} onChange={this.onChange.bind(this)} />
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmform="confirmpassword">Confirmar Contrasena: </label>
-                    <input name="confirmpassword" id="confirmpassword" type="password" value={this.state.password} onChange={this.onChange.bind(this)} />
-
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="country">Ciudad: </label>
-                    <select id="country" name="country" value={this.state.country} onChange={this.onChange.bind(this)}>
-                        <option value="">Seleccione un valor</option>
-                        <option value="">Santa Cruz</option>
-                        <option value="">La Paz</option>
-                        <option value="">El Alto</option>
-                        <option value="">Cochabamba</option>
-                        <option value="">Tarija</option>
-                        <option value="">Potosi</option>
-                        <option value="">Chuquisaca</option>
-                        <option value="">Oruro</option>
-                        <option value="">Beni</option>
-                        <option value="">Pando</option>
-                    </select>
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="phone">Telefono: </label>
-                    <input name="phone" id="phone" type="text" value={this.state.phone} onChange={this.onChange.bind(this)} />
-                </div>
-
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="typeuser">Tipo de Usuario: </label>
-                    <input type="radio" name="typeuser" value="d" onChange={this.onChange.bind(this)} /> Dador de Carga
-                <input type="radio" name="typeuser" value="t" onChange={this.onChange.bind(this)} /> Transportista
-                </div>
-
-                <div style={{ margin: '10px' }}>
-                    <label htmlFor="email">Correo Electronico: </label>
-                    <input name="email" id="email" type="text" value={this.state.email} onChange={this.onChange.bind(this)} />
-                </div>
-
-                <div style={{ margin: '5px' }}>
-                    <input id="acept" type="checkbox" name="acept" value={this.state.acept} onChange={this.onChange.bind(this)} /> Acepta terminos y condiciones
-                </div>
-
-                <div style={{margin:'10px'}}>
-                    <button onClick={this.save.bind(this)}> Registrar</button>
-                </div>
-
-                <a href='/'>Volver</a>
-            </div>
+            </Form>
         )
     }
 
